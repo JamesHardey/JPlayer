@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="650.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jplayer.controller.JVPlayerController">
+
+    <bottom>
+        <VBox fx:id="control" alignment="TOP_CENTER" prefHeight="73.0" prefWidth="539.0" style="-fx-background-color: #AAAAAA;" BorderPane.alignment="CENTER">
+            <children>
+                <Slider fx:id="prog" stylesheets="@style.css" />
+                <HBox prefHeight="36.0" prefWidth="539.0" VBox.vgrow="NEVER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="419.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                            <children>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#playPause" style="-fx-background-color: transparent;" text="Button" textAlignment="CENTER">
+                           <graphic>
+                                      <FontAwesomeIcon fx:id="playIcon" fill="#1f3a93" focusTraversable="true" glyphName="PLAY" size="1.7em" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#backSkip" style="-fx-background-color: transparent;" text="Button" textAlignment="CENTER">
+                           <graphic>
+                                      <FontAwesomeIcon fill="#1f3a93" focusTraversable="true" glyphName="FAST_BACKWARD" size="1.7em" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#backward" style="-fx-background-color: transparent;" text="Button" textAlignment="CENTER">
+                           <graphic>
+                                      <FontAwesomeIcon fill="#1f3a93" focusTraversable="true" glyphName="BACKWARD" size="1.7em" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#stopping" style="-fx-background-color: transparent;" text="Button" textAlignment="CENTER">
+                           <graphic>
+                                      <FontAwesomeIcon fill="#1f3a93" focusTraversable="true" glyphName="STOP" size="1.7em" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#forward" style="-fx-background-color: transparent;" text="Button" textAlignment="CENTER">
+                           <graphic>
+                                      <FontAwesomeIcon fill="#1f3a93" focusTraversable="true" glyphName="FORWARD" size="1.7em" />
+                           </graphic>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" onAction="#forwardSkip" style="-fx-background-color: transparent;" text="Button" textAlignment="CENTER">
+                           <graphic>
+                                      <FontAwesomeIcon fill="#1f3a93" focusTraversable="true" glyphName="FAST_FORWARD" size="1.7em" />
+                           </graphic>
+                        </Button>
+                                <Label fx:id="time" text="--:-- / --:--" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" focusTraversable="true" prefHeight="49.0" prefWidth="178.0">
+                            <children>
+                                <FontAwesomeIcon fx:id="volIcon" fill="#1f3a93" glyphName="VOLUME_UP" size="1.5em" />
+                                <Slider fx:id="vol" prefHeight="29.0" prefWidth="122.0" stylesheets="@style.css">
+                                    <padding>
+                                        <Insets right="5.0" />
+                                    </padding>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                                </Slider>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                    </padding>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="859.0" spacing="30.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Button onAction="#loadVideo" prefHeight="16.0" prefWidth="76.0" style="-fx-background-color: #1F3A93; -fx-background-radius: 20;" text="Load Video" textFill="#c9c8c8">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font></Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                    </padding>
+                </HBox>
+            </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+        </VBox>
+    </bottom>
+    <center>
+        <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" layoutX="95.0" layoutY="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="50.0">
+                    <children>
+                        <HBox alignment="CENTER">
+                            <children>
+                                <ImageView fitHeight="261.0" fitWidth="305.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../jplayer/assets/Icons.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children></AnchorPane>
+    </center>
+
+</BorderPane>
