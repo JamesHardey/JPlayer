@@ -9,8 +9,5 @@
         <module name="jplayer" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="jplayer" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

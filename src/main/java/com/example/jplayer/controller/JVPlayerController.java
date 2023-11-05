@@ -2,7 +2,9 @@ package com.example.jplayer.controller;
 
 
 import com.example.jplayer.JVplayer;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -33,6 +35,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -57,9 +60,9 @@ public class JVPlayerController implements Initializable {
     private MediaView mv;
     private Duration dur;
     @FXML
-    private FontAwesomeIcon playIcon;
+    private FontAwesomeIconView playIcon;
     @FXML
-    private FontAwesomeIcon volIcon;
+    private FontAwesomeIconView volIcon;
     @FXML
     private Slider prog;
     @FXML
@@ -142,7 +145,7 @@ public class JVPlayerController implements Initializable {
             this.addHistoryAndName(path, videoName);
         }
         catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Error "+ Arrays.toString(ex.getStackTrace()));
         }
     }
 
@@ -232,38 +235,67 @@ public class JVPlayerController implements Initializable {
         final Duration cur = this.mp.getCurrentTime();
         this.dur = this.mp.getMedia().getDuration();
         this.time.setText(this.formatTime(cur, this.dur));
-        System.out.println();
+        System.out.println("-----------");
         this.update("play");
     }
 
     private String formatTime(final Duration elapsed, final Duration duration) {
         int intElapsed = (int)Math.floor(elapsed.toSeconds());
         final int elapsedHours = intElapsed / 3600;
-        if (elapsedHours > 0) {
-            intElapsed -= elapsedHours * 60 * 60;
-        }
+        intElapsed -= elapsedHours * 3600; // Subtract hours
+
         final int elapsedMinutes = intElapsed / 60;
-        final int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 - elapsedMinutes * 60;
+        final int elapsedSeconds = intElapsed % 60;
+
         if (duration.greaterThan(Duration.ZERO)) {
             int intDuration = (int)Math.floor(duration.toSeconds());
             final int durationHours = intDuration / 3600;
-            if (durationHours > 0) {
-                intDuration -= durationHours * 60 * 60;
-            }
+            intDuration -= durationHours * 3600; // Subtract hours
+
             final int durationMinutes = intDuration / 60;
-            final int durationSeconds = intDuration - durationHours * 60 * 60 - durationMinutes * 60;
+            final int durationSeconds = intDuration % 60;
+
             if (durationHours > 0) {
                 return String.format("%d:%02d:%02d/%d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds, durationHours, durationMinutes, durationSeconds);
             }
             return String.format("%02d:%02d/%02d:%02d", elapsedMinutes, elapsedSeconds, durationMinutes, durationSeconds);
-        }
-        else {
+        } else {
             if (elapsedHours > 0) {
                 return String.format("%d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds);
             }
             return String.format("%02d:%02d", elapsedMinutes, elapsedSeconds);
         }
     }
+
+
+//    private String formatTime(final Duration elapsed, final Duration duration) {
+//        int intElapsed = (int)Math.floor(elapsed.toSeconds());
+//        final int elapsedHours = intElapsed / 3600;
+//        if (elapsedHours > 0) {
+//            intElapsed -= elapsedHours * 60 * 60;
+//        }
+//        final int elapsedMinutes = intElapsed / 60;
+//        final int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 - elapsedMinutes * 60;
+//        if (duration.greaterThan(Duration.ZERO)) {
+//            int intDuration = (int)Math.floor(duration.toSeconds());
+//            final int durationHours = intDuration / 3600;
+//            if (durationHours > 0) {
+//                intDuration -= durationHours * 60 * 60;
+//            }
+//            final int durationMinutes = intDuration / 60;
+//            final int durationSeconds = intDuration - durationHours * 60 * 60 - durationMinutes * 60;
+//            if (durationHours > 0) {
+//                return String.format("%2d:%02d:%02d/%2d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds, durationHours, durationMinutes, durationSeconds);
+//            }
+//            return String.format("%02d:%02d/%02d:%02d", elapsedMinutes, elapsedSeconds, durationMinutes, durationSeconds);
+//        }
+//        else {
+//            if (elapsedHours > 0) {
+//                return String.format("%d:%02d:%02d", elapsedHours, elapsedMinutes, elapsedSeconds);
+//            }
+//            return String.format("%02d:%02d", elapsedMinutes, elapsedSeconds);
+//        }
+//    }
 
     protected void updateValues() {
         if (this.time != null && this.prog != null && this.vol != null && this.dur != null) {
@@ -294,10 +326,10 @@ public class JVPlayerController implements Initializable {
 
     private void update(final String status) {
         if ("play".equals(status)) {
-            this.playIcon.setGlyphName("PAUSE");
+            this.playIcon.setGlyphName(FontAwesomeIcon.PAUSE.name());
         }
         if ("pause".equals(status)) {
-            this.playIcon.setGlyphName("PLAY");
+            this.playIcon.setGlyphName(FontAwesomeIcon.PLAY.name());
         }
     }
 
