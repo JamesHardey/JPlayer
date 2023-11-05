@@ -14,10 +14,10 @@ JPlayer is a desktop video player application built using JavaFX, designed to pr
 - **Customization**: You can extend and customize the application to fit your specific needs.
 
 ## Screenshots
-![Screenshot 1](./screenshots/Jplayer.png)
+![Screenshot 1](./screenshots/Jplayer.PNG)
 
 
-![Screenshot 1](./screenshots/Jplayer2.png)
+![Screenshot 1](./screenshots/Jplayer2.PNG)
 
 
 ## Getting Started
