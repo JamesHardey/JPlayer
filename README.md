@@ -55,7 +55,7 @@ If you encounter any issues or have questions, please [open an issue](https://gi
 We'd like to thank the Java and JavaFX communities for their support and contributions to this project.
 
 ## Author
-- Your Name
+- James Hardey
 - GitHub: [JamesHardey](https://github.com/JamesHardey)
 
 ## Disclaimer
